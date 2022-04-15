@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:maqsafy/screens/HomeScreen.dart';
+import 'package:maqsafy/core/bindings/app_bindings.dart';
+import 'package:get/get.dart';
 
 import 'core/constants/colors.dart';
 import 'core/constants/design_screen_size.dart';
-import 'firebase_options.dart';
-import 'screens/auth_screen.dart';
+import 'screens/navigator_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  //
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
   runApp(const MaqsafyApp());
 }
@@ -28,17 +27,18 @@ class MaqsafyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_) {
-        return MaterialApp(
+        return GetMaterialApp(
           title: 'Maqsafy',
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
+          initialBinding: AppBindings(),
           theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch().copyWith(
               primary: AppColors.primaryColor,
               secondary: AppColors.secondaryColor,
             ),
           ),
-          home: const HomeScreen(),
+          home: const NavigationScreen(),
         );
       },
     );
